@@ -1,0 +1,99 @@
+<odoo>
+    <data>
+        <record id="estate_property_1" model="estate.property">
+            <field name="name">Big Villa</field>
+            <field name="state">new</field>
+            <field name="description">A nice and big villa</field>
+            <field name="postcode">12345</field>
+            <field name="type_id" ref="estate.estate_property_type_1"/>
+            <field name="date_availability">2022-02-02</field>
+            <field name="expected_price">16000</field>
+            <field name="bedrooms">6</field>
+            <field name="living_area">100</field>
+            <field name="facades">4</field>
+            <field name="garage" eval="True"/>
+            <field name="garden" eval="True"/>
+            <field name="garden_area">1000</field>
+            <field name="garden_orientation">south</field>
+            <field name="user_id" eval="False"/>
+        </record>
+
+        <record id="estate_property_2" model="estate.property">
+            <field name="name">Trailer home</field>
+            <field name="state">cancelled</field>
+            <field name="description">Home in a trailer park</field>
+            <field name="postcode">6986</field>
+            <field name="type_id" ref="estate.estate_property_type_1"/>
+            <field name="date_availability">2022-02-1</field>
+            <field name="expected_price">1600</field>
+            <field name="selling_price">0</field>
+            <field name="bedrooms">7</field>
+            <field name="living_area">200</field>
+            <field name="facades">4</field>
+            <field name="garage" eval="False"/>
+            <field name="user_id" eval="False"/>
+        </record>
+
+        <record id="estate_property_3" model="estate.property">
+            <field name="name">Bunglow</field>
+            <field name="state">new</field>
+            <field name="description">A nice and big bunglow</field>
+            <field name="postcode">39108</field>
+            <field name="type_id" ref="estate.estate_property_type_1"/>
+            <field name="date_availability">2022-02-02</field>
+            <field name="expected_price">16000</field>
+            <field name="bedrooms">6</field>
+            <field name="living_area">100</field>
+            <field name="facades">4</field>
+            <field name="garage" eval="True"/>
+            <field name="garden" eval="True"/>
+            <field name="garden_area">1000</field>
+            <field name="garden_orientation">south</field>
+            <field name="user_id" eval="False"/>
+            <field name="offer_ids" eval="[
+                (0, 0, {
+                    'partner_id': ref('base.res_partner_12'),
+                    'price': 20000,
+                    'validity_days': 14
+                }),
+                (0, 0, {
+                    'partner_id': ref('base.res_partner_12'),
+                    'price': 20000,
+                    'validity_days': 14
+                })
+            ]"/>
+        </record>
+
+        <record id="offer_id_1" model="estate.property.offer">
+            <field name="partner_id" ref="base.res_partner_12"/>
+            <field name="property_id" ref="estate.estate_property_1"/>
+            <field name="price">10000</field>
+            <field name="validity_days">14</field>
+        </record>
+
+        <record id="offer_id_2" model="estate.property.offer">
+            <field name="partner_id" ref="base.res_partner_12"/>
+            <field name="property_id" ref="estate.estate_property_1"/>
+            <field name="price">1500000</field>
+            <field name="validity_days">14</field>
+        </record>
+
+        <record id="offer_id_3" model="estate.property.offer">
+            <field name="partner_id" ref="base.res_partner_2"/>
+            <field name="property_id" ref="estate.estate_property_1"/>
+            <field name="price">1500001</field>
+            <field name="validity_days">14</field>
+        </record>
+
+        <function model="estate.property.offer" name="action_accepted">
+            <value eval="[ref('offer_id_2')]"/>
+        </function>
+        <function model="estate.property.offer" name="action_refused">
+            <value eval="[ref('offer_id_1')]"/>
+        </function>
+        <function model="estate.property.offer" name="action_refused">
+            <value eval="[ref('offer_id_3')]"/>
+        </function>
+
+    </data>
+</odoo>

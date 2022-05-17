@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="estate_property_view_form_inherit" model="ir.ui.view">
+        <field name="name">estate.property.form.inherit</field>
+        <field name="model">estate.property</field>
+        <field name="inherit_id" ref="estate.estate_property_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//group[@name='other_info']" position="after">
+                <group name="invoices">
+                    <field name="invoice_id"/>
+                </group>
+            </xpath>
+        </field>
+    </record>
+</odoo>

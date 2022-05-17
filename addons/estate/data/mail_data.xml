@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="email_template_offer_accepted" model="mail.template">
+            <field name="name">Estate Offer Accepted: Send by email</field>
+            <field name="model_id" ref="estate.model_estate_property"/>
+            <field name="subject">${object.company_id.name}, Offer Accepted for ${object.name}</field>
+            <field name="email_from">${(object.user_id.email_formatted or user.email_formatted) | safe}</field>
+            <field name="partner_to">${object.partner_id.id}</field>
+            <field name="body_html" type="html">
+<div style="margin: 0px; padding: 0px;">
+    <p style="margin: 0px; padding: 0px; font-size: 13px;">
+        Hello ${object.partner_id.name},
+        <br/><br/>
+        Your Offer for ${object.name} has been Accepted. Property details are:
+        <ul>
+            <li><strong>Address:</strong>${object.address_id.street}, ${object.address_id.zip}, ${object.address_id.city}</li>
+            <li><strong>Sold Price:</strong>${object.selling_price}</li>
+            <li><strong>Property Type</strong>${object.type_id.name}</li>
+            <li><strong>Bedroom:</strong>${object.bedrooms}</li>
+            <li><strong>Living Area:</strong>${object.living_area}</li>
+            <li><strong>Facedes:</strong>${object.facades}</li>
+            <li><strong>Total Area:</strong>${object.total_area}</li>
+        </ul>
+        <br/><br/>
+        Please contact our salesperson.
+        <br/>
+    </p>
+</div>
+            </field>
+            <field name="lang">${object.partner_id.lang}</field>
+            <field name="auto_delete" eval="True"/>
+        </record>
+
+        <record id="email_template_offer_refused" model="mail.template">
+            <field name="name">Estate Offer Refused: Send by email</field>
+            <field name="model_id" ref="estate.model_estate_property"/>
+            <field name="subject">${object.company_id.name}, Offer Rejected for ${object.name}</field>
+            <field name="email_from">${(object.user_id.email_formatted or user.email_formatted) | safe}</field>
+            <field name="partner_to">${object.partner_id.id}</field>
+            <field name="body_html" type="html">
+<div style="margin: 0px; padding: 0px;">
+    <p style="margin: 0px; padding: 0px; font-size: 13px;">
+        Hello ${object.partner_id.name},
+        <br/><br/>
+        Sorry Your Offer for ${object.name} has been Rejected. Property details are:
+        <ul>
+            <li><strong>Address:</strong>${object.address_id.street}, ${object.address_id.zip}, ${object.address_id.city}</li>
+            <li><strong>Sold Price:</strong>${object.selling_price}</li>
+            <li><strong>Property Type</strong>${object.type_id.name}</li>
+            <li><strong>Bedroom:</strong>${object.bedrooms}</li>
+            <li><strong>Living Area:</strong>${object.living_area}</li>
+            <li><strong>Facedes:</strong>${object.facades}</li>
+            <li><strong>Total Area:</strong>${object.total_area}</li>
+        </ul>
+        <br/><br/>
+        Sorry for your inconvinience.
+        <br/>
+    </p>
+</div>
+            </field>
+            <field name="lang">${object.partner_id.lang}</field>
+            <field name="auto_delete" eval="True"/>
+        </record>
+    </data>
+</odoo>

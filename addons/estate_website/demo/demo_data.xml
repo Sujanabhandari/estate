@@ -1,0 +1,12 @@
+<odoo>
+    <record id="Villa" model="estate.property">
+        <field name="name">Diana Padilla</field>
+    </record>
+    <record id="Mainson" model="estate.property">
+        <field name="name">Jody Carroll</field>
+    </record>
+    <record id="Bunglow" model="estate.property">
+        <field name="name">Lester Vaughn</field>
+    </record>
+
+</odoo>

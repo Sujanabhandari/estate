@@ -1,0 +1,188 @@
+<odoo>
+	<data>
+		<record id="estate_menu" model="website.menu">
+			<field name="name">Estate</field>
+			<field name="url">/estates</field>
+			<field name="parent_id" ref= "website.main_menu"></field>
+			<field name="sequence" type="int">80</field>
+		</record>
+	</data>
+
+
+	<template id="index">
+		<t t-call="website.layout">
+			<t t-set="title">Estate Properties</t>
+			<div class="oe_structure">
+				<div class="container">
+					<!-- <div class="input-group">
+						<input type="search" class="form-control" placeholder="Search" aria-label="Search" />
+						<button type="button" class="btn btn-outline-primary"><span class="glyphicon glyphicon-search"></span>search</button>
+					</div> -->
+					<div class="row ev-search-results ev-property-page-results">
+						<t t-foreach="propertys" t-as="property">
+							<div class="col-lg-4 col-md-6 col-sm-12 mb-3">
+								<a t-attf-href="/estate/{{ slug(property) }}">
+									<div class="box-two proerty-item">
+										<div class="item-thumb" style="height: 256px">
+											<img t-attf-src="data:image/jpg;base64,{{ property.estate_image }}" class="img-responsive mw-100"/>
+										</div>
+										<div class="item-entry overflow px-3 pb-2">
+											<h5>
+												<t t-esc="property.name"/>
+											</h5>
+											<div class = "dot-hr"/>
+											<div class = "pull-left">
+												<b> Area:</b>
+												<span t-field="property.total_area"/>
+											</div>
+											<div class="proerty-price pull-right">
+												<span t-field="property.expected_price" />
+												<span>&#8364;</span>
+											</div>
+										</div>
+									</div>
+								</a>
+							</div>
+						</t>
+					</div>
+				</div>
+			</div>
+		</t>
+	</template>
+
+	<template id="description">
+		<t t-call="website.layout">
+			<t t-set="title">Estate</t>
+			<div class="oe_structure"/>
+			<div class="oe_structure">
+				<div class="container">
+					<a href="/estates" class="btn btn-primary mb-2 mt-3 o_default_snippet_text" onclick="history.back()">Return</a>
+					<div class="single-property-wrapper">
+						<div class="single-property-header">
+							<img t-attf-src="data:image/jpg;base64,{{ propertyinfo.estate_image }}" style=" height: 450px; max-width:auto;" class="mx-auto d-block "/>
+							<!-- class="mx-auto d-block" -->
+							<h1 class="property-title" t-field="propertyinfo.name" />
+							<address t-field = "propertyinfo.address_id" t-options='{"widget": "contact", "fields": ["address"]}' />
+						</div>
+						<div class="property-meta entry-meta clearfix ">
+							<div class="ev-key-fact">
+								<div class="ev-key-fact-value" t-field="propertyinfo.total_area">sqft</div>
+								<div class="ev-key-fact-title">Area</div>
+
+							</div>
+							<div class="ev-key-fact">
+								<div class="ev-key-fact-value" t-field="propertyinfo.bedrooms"></div>
+								<div class="ev-key-fact-title">Bedrooms</div>
+							</div>
+							<div class="ev-key-fact">
+								<div class="ev-key-fact-value" t-field="propertyinfo.garden_orientation"></div>
+								<div class="ev-key-fact-title">Garden Orientations</div>
+							</div>
+							<div class="ev-key-fact">
+								<div class="ev-key-fact-value" t-field="propertyinfo.expected_price"></div>
+								<div class="ev-key-fact-title">Expected Price</div>
+							</div>
+							<div class="ev-key-fact">
+								<div class="ev-key-fact-value" t-field="propertyinfo.best_price"></div>
+								<div class="ev-key-fact-title">Best Offer</div>
+							</div>
+							<!-- <div class="ev-key-fact">
+								<address t-field = "propertyinfo.address_id" t-options='{"widget": "contact", "fields": ["address"]}' />
+							</div> -->
+						</div>
+
+					</div>
+				</div>
+			</div>
+			<div class="oe_structure">
+				<!-- <t t-foreach="request_offers" t-as="offer"> -->
+				<div class="container-fluid px-1 py-5 mx-auto">
+					<div class="row d-flex justify-content-center">
+						<div class="col-xl-7 col-lg-8 col-md-9 col-11 text-center">
+							<h3>Request a Offer</h3>
+							<!-- <span t-field="request_offers.partner_id"/> -->
+							<div class="card">
+								<h5 class="text-center mb-4">Your Best Price</h5>
+								<form action="/offer">
+									<div class="row justify-content-between text-left">
+										<div class="form-group col-sm-6 flex-column d-flex">
+											<label class="form-control-label px-3">First name<span class="text-danger"> *</span>
+											</label>
+											<input type="text" id="fname" name="fname" placeholder="Enter your first name"/>
+										</div>
+										<!-- t-att-<html-attribute> to make dynamic field. -->
+										<input name="property_id" type="hidden" t-att-value="propertyinfo.id"/>
+										<div class="form-group col-sm-6 flex-column d-flex">
+											<label class="form-control-label px-3">Last name<span class="text-danger"> *</span>
+											</label>
+											<input type="text" id="lname" name="lname" placeholder="Enter your last name" />
+										</div>
+									</div>
+									<div class="row justify-content-between text-left">
+										<div class="form-group col-sm-6 flex-column d-flex">
+											<label class="form-control-label px-3">Email<span class="text-danger"> *</span>
+											</label>
+											<input type="email" id="email" name="email" placeholder=""/>
+										</div>
+										<div class="form-group col-sm-6 flex-column d-flex">
+											<label class="form-control-label px-3">Phone number<span class="text-danger"> *</span>
+											</label>
+											<input type="phone" id="phone" name="phone" placeholder=""/>
+										</div>
+									</div>
+									<div class="row justify-content-between text-left">
+										<div class="form-group col-sm-6 flex-column d-flex">
+											<label class="form-control-label px-3">Offer Price<span class="text-danger"> *</span>
+											</label>
+											<input type="number" id="offer_price" name="offer_price" placeholder="" />
+										</div>
+									</div>
+									<div class="row justify-content-end">
+										<div class="form-group col-sm-6">
+											<button type="submit" class="btn-block btn-primary">Offer Request</button>
+										</div>
+									</div>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- </t> -->
+			</div>
+			<div class="oe_structure"/>
+		</t>
+	</template>
+
+	<template id="offer_thankyou">
+		<t t-call="website.layout">
+			<t t-set="title">Offer Request</t>
+			<div class="oe_structure"/>
+			<div>
+				<div class="thankyou-page">
+					<div class="_header">
+						<h1>Thank You!</h1>
+					</div>
+					<div class="_body">
+						<div class="_box">
+							<h2>
+								<strong>Your offer for <span t-field="offer.property_id.name"/>
+ 									has been submitted succesfully
+								</strong>
+							</h2>
+							<p>
+								We will contact you soon for the offer.
+							</p>
+						</div>
+					</div>
+					<div class="_footer">
+						<p>Having trouble? <a href="">Contact us</a>
+						</p>
+						<a class="btn" href="/estates">Back to homepage</a>
+					</div>
+				</div>
+			</div>
+			<div class="oe_structure"/>
+		</t>
+	</template>
+
+</odoo>
