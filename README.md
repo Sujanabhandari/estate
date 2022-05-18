@@ -168,16 +168,12 @@ If you are using Visual Studio Code you will be able to debug following this ste
             "host": "localhost",
             "pathMappings": [
                 {
-                    "localRoot": "${workspaceFolder}/addons_bp",
-                    "remoteRoot": "/mnt/addons_bp", //path to custom addons inside docker
+                    "localRoot": "${workspaceFolder}/addons",
+                    "remoteRoot": "/mnt/addons_custom", //path to custom addons inside docker
                 },
                 {
                     "localRoot": "${workspaceFolder}/addons_ext",
                     "remoteRoot": "/mnt/addons_ext", //path to external addons inside docker
-                },
-                {
-                    "localRoot": "${workspaceFolder}/addons_enterprise",
-                    "remoteRoot": "/mnt/enterprise", //path to enterprise addons inside docker
                 }
             ],
             "logToFile": true
