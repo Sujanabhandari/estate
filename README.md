@@ -81,8 +81,6 @@ If you need to change any of the default configurations of the docker setup you 
 * ODOO_PORT: to change the port where odoo will be running (default 8069)
 * PGADMIN_PORT: to change the port where pgadmin will be running (default 8099)
 * PROJECT_CODE: to define the string used to identify tickets of the project. This will be used to check git branches names and commit messages.
-* DEV_BRANCH: used as default checkout branch. Set this variable especially if you want to use ./dev.sh
-* INITIAL_ADDONS: will be installed by default when using ./dev.sh
 
 Just remember to rebuild the containers after changes the environment variables, for the changes to take effect.
 
@@ -149,7 +147,7 @@ pre-commit run --all-files
 
 ## Debugging
 ### PDB
-To run pdb just run `docker exec RCE-ODOO`. Here put either container name or id.
+To run pdb just run `docker exec TEST-ODOO`. Here put either container name or id.
 
 ### Visual Studio Code
 If you are using Visual Studio Code you will be able to debug following this steps
